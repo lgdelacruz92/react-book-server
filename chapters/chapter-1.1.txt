@@ -53,3 +53,6 @@ React's true magic comes from its uncanny ability to create highly interactive a
 
 
 And so, dear reader, that is the tale of React, a humble hero born from the need to conquer the monstrous codebase and bring peace and order to the world of web development. The adventure continues, as React constantly evolves and shapes the ever-changing landscape of frontend technology.
+<br><br>
+<br><br>
+<br><br>
