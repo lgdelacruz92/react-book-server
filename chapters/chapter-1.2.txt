@@ -1,3 +1,5 @@
+![Army of Knight Coders](http://localhost:3003/images/army-of-coders.png "Army of Knight Coders")
+
 # Chapter 1.2: Why Use React? - The Legend Unravels
 <br>
 

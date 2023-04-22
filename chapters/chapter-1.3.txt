@@ -1,3 +1,5 @@
+![Knight Globe](http://localhost:3003/images/knight-globe.png "Knight Globe")
+
 # Chapter 1.3: React's Impact on Web Development - A New Era Dawns
 <br>
 
