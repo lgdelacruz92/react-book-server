@@ -1,25 +1,26 @@
 import express from 'express';
 import { Request, Response} from 'express';
 import fs from 'fs';
-import { ChapterSlugs } from './chapters/chapter-slugs';
+import { chapters } from './chapters/chapters';
 import cors from 'cors';
+import { findInChapter } from './utils/find-section';
 
 const app = express();
 
 app.use(cors());
 
 app.get('/api/chapters', (req: Request, res: Response) => {
-  res.json(ChapterSlugs);
+  res.json(chapters);
 });
 
 
 app.get('/api/chapters/:fileName', (req: Request, res: Response) => {
-    const chapter = fs.readFileSync(`./chapters/${req.params.fileName}.txt`, 'utf-8');
-    const chapterSlug = ChapterSlugs.find((chapter) => chapter.fileName === req.params.fileName);
+    const sectionMarkdownText = fs.readFileSync(`./chapters/${req.params.fileName}.txt`, 'utf-8');
+    const sectionInfo = findInChapter(chapters, req.params.fileName);
     res.json({
-        title: chapterSlug.title,
-        content: chapter,
-        fileName: chapterSlug.fileName
+        title: sectionInfo.title,
+        content: sectionMarkdownText,
+        fileName: sectionInfo.fileName
     });
 });
 

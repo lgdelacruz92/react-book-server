@@ -1,5 +1,7 @@
+import { SectionType } from "./section-type";
+
 export interface ChapterType {
-    fileName: string;
-    content: string;
+    chapter: number;
+    sections: SectionType[];
     title: string;
 }

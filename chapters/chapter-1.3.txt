@@ -2,12 +2,13 @@
 <br>
 
 ## Introduction
-<br><br>
+<br>
 
 As we've ventured through the captivating tale of React, we've witnessed its rise to legendary status. But what impact has this mighty hero had on the realm of web development? In this chapter, we'll recount the ways React has transformed the landscape and ushered in a new era of frontend excellence.
+<br><br>
 
 ## A World Forever Changed
-<br><br>
+<br>
 
 React's arrival on the web development stage sent shockwaves through the realm, as its innovative ideas and magical powers shaped the way developers approached their craft. Here are a few ways React has revolutionized web development:
 <br><br>
