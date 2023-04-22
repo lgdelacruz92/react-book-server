@@ -13,7 +13,7 @@ app.get('/api/chapters', (req: Request, res: Response) => {
 });
 
 
-app.get('/api/chapters/:slug', (req: Request, res: Response) => {
+app.get('/api/chapters/:fileName', (req: Request, res: Response) => {
     const chapter = fs.readFileSync(`./chapters/${req.params.fileName}.txt`, 'utf-8');
     const chapterSlug = ChapterSlugs.find((chapter) => chapter.fileName === req.params.fileName);
     res.json({
