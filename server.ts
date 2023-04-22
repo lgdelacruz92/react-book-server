@@ -4,9 +4,11 @@ import fs from 'fs';
 import { chapters } from './chapters/chapters';
 import cors from 'cors';
 import { findInChapter } from './utils/find-section';
+require('dotenv').config()
 
 const app = express();
 
+app.use(express.static('public'));
 app.use(cors());
 
 app.get('/api/chapters', (req: Request, res: Response) => {
