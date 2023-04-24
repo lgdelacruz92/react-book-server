@@ -21,5 +21,17 @@ export const chapters: ChapterType[] = [
                 content: ''
             }
         ]
+    },
+    {
+        title: 'Chapter 2',
+        chapter: 2,
+        sections: [
+            {
+                title: 'Chapter 2.1',
+                fileName: 'chapter-2.1',
+                content: ''
+            },
+
+        ]
     }
 ]
