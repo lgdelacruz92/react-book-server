@@ -5,6 +5,8 @@ import { chapters } from "./chapters/chapters";
 import cors from "cors";
 import { findInChapter } from "./utils/find-section";
 import bodyParser from "body-parser";
+import { postChat } from "./services/api/chatgpt";
+import flatted from "flatted";
 
 require("dotenv").config();
 
@@ -31,8 +33,19 @@ app.get("/api/chapters/:fileName", (req: Request, res: Response) => {
   });
 });
 
-app.get("/api/chatgpt", (req: Request, res: Response) => {
-  const payload = req.body;
+app.post("/api/chatgpt", async (req: Request, res: Response) => {
+  const { messages } = req.body;
+  try {
+    const response = await postChat({
+      model: "gpt-3.5-turbo",
+      messages,
+    });
+    res.setHeader("Content-Type", "application/json");
+    res.send(response.data);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 });
 
 const port = 3003;

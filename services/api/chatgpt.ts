@@ -1,12 +1,8 @@
-import fetch from "node-fetch";
 import { PostChatDataType } from "../../types/chatgpt/post-chat-data-type";
-
-const url = "http://example.com/api/endpoint";
+import axios from "axios";
 
 export const postChat = async (data: PostChatDataType) => {
-  return await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" },
+  return await axios.post(process.env.CHATGPT_API_URL, data, {
+    headers: { Authorization: `Bearer ${process.env.CHATGPT_API_KEY}` },
   });
 };
