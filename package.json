@@ -12,6 +12,7 @@
     "node-fetch": "^3.3.1",
     "nodemon": "^2.0.22",
     "openai": "^3.2.1",
+    "stream-chat": "^8.6.0",
     "typescript": "^5.0.4"
   },
   "devDependencies": {

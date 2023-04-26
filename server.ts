@@ -6,7 +6,7 @@ import cors from "cors";
 import { findInChapter } from "./utils/find-section";
 import bodyParser from "body-parser";
 import { postChat } from "./services/api/chatgpt";
-import flatted from "flatted";
+import { StreamChat } from "stream-chat";
 
 require("dotenv").config();
 
@@ -46,6 +46,15 @@ app.post("/api/chatgpt", async (req: Request, res: Response) => {
     console.log(err);
     res.send(err);
   }
+});
+
+app.post("/api/streamchat", async (req: Request, res: Response) => {
+  const { user } = req.body;
+  const serverClient = StreamChat.getInstance(
+    process.env.STREAMCHAT_KEY || "",
+    process.env.STREAMCHAT_SECRET || ""
+  );
+  res.json({ token: serverClient.createToken(user) });
 });
 
 const port = 3003;
