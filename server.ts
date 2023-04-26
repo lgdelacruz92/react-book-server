@@ -48,7 +48,7 @@ app.post("/api/chatgpt", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/api/streamchat", async (req: Request, res: Response) => {
+app.post("/api/streamchat/token", async (req: Request, res: Response) => {
   const { user } = req.body;
   const serverClient = StreamChat.getInstance(
     process.env.STREAMCHAT_KEY || "",
