@@ -24,15 +24,15 @@ const ChannelUserRepository = {
       throw new Error("Invalid channelId");
     }
 
-    const usersDocRef = db.collection("users").doc(channelId);
+    const usersDocRef = db.collection("channel-user-repository").doc(channelId);
     const doc = await usersDocRef.get();
 
     if (!doc.exists) {
       console.warn(`No users found for channel ${channelId}`);
-      return [];
+      return null;
     }
 
-    return [doc.data().userId];
+    return doc.data().userId;
   },
 };
 
