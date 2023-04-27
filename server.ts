@@ -16,6 +16,7 @@ import {
   createUserForChannel,
   getUserForChannel,
 } from "./api/firestore/channel-user-repository";
+import { createUser, getUser } from "./api/firestore/user";
 
 require("dotenv").config();
 
@@ -114,6 +115,9 @@ app.post("/api/stop-tutoring", stopTutoring);
 // Firestore
 app.post("/api/channel-user-repository/create", createUserForChannel);
 app.get("/api/channel-user-repository/get/:channelId", getUserForChannel);
+
+app.post("/api/user/create", createUser);
+app.get("/api/user/get/:userId", getUser);
 
 const port = 3003;
 app.listen(port, () => {
