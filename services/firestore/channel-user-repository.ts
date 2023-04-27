@@ -6,7 +6,7 @@ const ChannelUserRepository = {
       throw new Error("Invalid channelId or userId");
     }
 
-    const usersDocRef = db.collection("users").doc(channelId);
+    const usersDocRef = db.collection("channel-user-repository").doc(channelId);
 
     try {
       await usersDocRef.set({ userId });
