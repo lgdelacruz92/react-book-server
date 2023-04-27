@@ -10,6 +10,7 @@ import { sendStreamChatMessageResponse } from "./services/send-stream-chat-messa
 import { createStreamChatToken } from "./utils/stream-chat/create-stream-chat-token";
 import { startTutoring } from "./api/start-tutoring";
 import { stopTutoring } from "./api/stop-tutoring";
+import { streamChatInstance } from "./services/stream-chat-instance";
 
 require("dotenv").config();
 
@@ -70,6 +71,30 @@ app.post("/api/streamchat/token", async (req: Request, res: Response) => {
   const { user } = req.body;
 
   res.json({ token: createStreamChatToken(user) });
+});
+
+app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
+  // console.log(req.body);
+
+  // grab channel id from body
+  const { channel_id } = req.body;
+
+  // connect to channel
+  const channel = streamChatInstance.channel("messaging", channel_id);
+
+  const messages = await streamChatInstance.search(
+    { members: { $in: [channel_id] } },
+    { text: { $exists: true } },
+    { limit: 100, offset: 0, sort: [{ updated_at: 1 }] }
+  );
+
+  // get channel messagese
+  console.log(messages);
+  // console.log(messages.results[0].message);
+  messages.results.map(({ message }) => {
+    console.log(message.text);
+  });
+  res.sendStatus(200);
 });
 
 app.post("/api/start-tutoring", startTutoring);

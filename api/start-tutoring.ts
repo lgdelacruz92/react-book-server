@@ -14,44 +14,44 @@ export const startTutoring = async (req, res) => {
   //   );
   //   await connectedChannel.watch();
   try {
-    const { users } = await streamChatInstance.queryUsers({
-      id: assistant_id,
-    });
+    // const { users } = await streamChatInstance.queryUsers({
+    //   id: assistant_id,
+    // });
 
-    if (users.length === 0) {
-      await upsertStreamChatUser(assistant_id);
-    }
+    // if (users.length === 0) {
+    //   await upsertStreamChatUser(assistant_id);
+    // }
 
-    console.log("channel_id", channel_id);
-    // Open the channel with the given `channel_id`
-    const channel = streamChatInstance.channel("messaging", channel_id);
+    // console.log("channel_id", channel_id);
+    // // Open the channel with the given `channel_id`
+    // const channel = streamChatInstance.channel("messaging", channel_id);
 
-    // Watch the channel for new events
-    await channel.watch();
+    // // Watch the channel for new events
+    // await channel.watch();
 
-    // Add the assistant as a user in the channel
-    const members = Object.keys(channel.state.members);
-    console.log("members", members);
-    if (!members.includes(assistant_id)) {
-      await channel.addMembers([assistant_id]);
-    }
+    // // Add the assistant as a user in the channel
+    // const members = Object.keys(channel.state.members);
+    // console.log("members", members);
+    // if (!members.includes(assistant_id)) {
+    //   await channel.addMembers([assistant_id]);
+    // }
 
-    // await streamChatInstance.connectUser(
-    //   { id: assistant_id },
-    //   createStreamChatToken(assistant_id)
-    // );
+    // // await streamChatInstance.connectUser(
+    // //   { id: assistant_id },
+    // //   createStreamChatToken(assistant_id)
+    // // );
 
-    console.log("listening for messages...");
+    // console.log("listening for messages...");
 
-    // Listen for new messages in the channel
-    channel.on("message.new", async (event) => {
-      // Do something with the new message (e.g., respond in the channel)
-      console.log(event.message.text);
-      await channel.sendMessage({
-        text: `Hello, you sent: "${event.message.text}"`,
-        user_id: assistant_id,
-      });
-    });
+    // // Listen for new messages in the channel
+    // channel.on("message.new", async (event) => {
+    //   // Do something with the new message (e.g., respond in the channel)
+    //   console.log(event.message.text);
+    //   await channel.sendMessage({
+    //     text: `Hello, you sent: "${event.message.text}"`,
+    //     user_id: assistant_id,
+    //   });
+    // });
 
     res.status(200).json({ success: true });
   } catch (error) {
