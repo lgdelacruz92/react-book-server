@@ -6,7 +6,10 @@ import cors from "cors";
 import { findInChapter } from "./utils/find-section";
 import bodyParser from "body-parser";
 import { postChat } from "./services/api/chatgpt";
-import { StreamChat } from "stream-chat";
+import { sendStreamChatMessageResponse } from "./services/send-stream-chat-message";
+import { createStreamChatToken } from "./utils/stream-chat/create-stream-chat-token";
+import { startTutoring } from "./api/start-tutoring";
+import { stopTutoring } from "./api/stop-tutoring";
 
 require("dotenv").config();
 
@@ -33,15 +36,30 @@ app.get("/api/chapters/:fileName", (req: Request, res: Response) => {
   });
 });
 
+// I don't actually need all of this
+// I can just use stream chat to listen for messages
 app.post("/api/chatgpt", async (req: Request, res: Response) => {
-  const { messages } = req.body;
+  const { messages, channelId, userToken } = req.body;
   try {
     const response = await postChat({
       model: "gpt-3.5-turbo",
       messages,
     });
     res.setHeader("Content-Type", "application/json");
-    res.send(response.data);
+
+    const aiResponseJson = response.data;
+    const aiResponseMessage =
+      aiResponseJson.choices[aiResponseJson.choices.length - 1].message.content;
+    const aiResponseUserId =
+      aiResponseJson.choices[aiResponseJson.choices.length - 1].message.role;
+
+    const message = await sendStreamChatMessageResponse(
+      channelId,
+      aiResponseMessage,
+      aiResponseUserId,
+      userToken || createStreamChatToken(aiResponseUserId)
+    );
+    res.send({ message });
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -50,12 +68,12 @@ app.post("/api/chatgpt", async (req: Request, res: Response) => {
 
 app.post("/api/streamchat/token", async (req: Request, res: Response) => {
   const { user } = req.body;
-  const serverClient = StreamChat.getInstance(
-    process.env.STREAMCHAT_KEY || "",
-    process.env.STREAMCHAT_SECRET || ""
-  );
-  res.json({ token: serverClient.createToken(user) });
+
+  res.json({ token: createStreamChatToken(user) });
 });
+
+app.post("/api/start-tutoring", startTutoring);
+app.post("/api/stop-tutoring", stopTutoring);
 
 const port = 3003;
 app.listen(port, () => {
