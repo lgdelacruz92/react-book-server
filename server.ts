@@ -12,6 +12,7 @@ import { startTutoring } from "./api/start-tutoring";
 import { stopTutoring } from "./api/stop-tutoring";
 import { streamChatInstance } from "./services/stream-chat-instance";
 import { searchAPIResponseToPostChatGPTData } from "./utils/stream-chat/search-api-response-to-post-chatgpt-data";
+import { createChannelUserRepository } from "./api/firestore/channel-user-repository";
 
 require("dotenv").config();
 
@@ -106,6 +107,9 @@ app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
 
 app.post("/api/start-tutoring", startTutoring);
 app.post("/api/stop-tutoring", stopTutoring);
+
+// Firestore
+app.post("/api/create-channel-user-repository", createChannelUserRepository);
 
 const port = 3003;
 app.listen(port, () => {
