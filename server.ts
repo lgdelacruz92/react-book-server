@@ -86,18 +86,26 @@ app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
 
   // connect to channel
   const channel = streamChatInstance.channel("messaging", channel_id);
-
+  const queryMembersResults = await channel.queryMembers({});
   const messages = await streamChatInstance.search(
-    { members: { $in: [user.id, "assistant"] } },
+    {
+      members: {
+        $in: [...queryMembersResults.members.map((member) => member.user_id)],
+      },
+    },
     { text: { $exists: true } },
     { limit: 100, offset: 0, sort: [{ updated_at: -1 }] }
   );
 
   messages.results.reverse();
 
+  // messages.results.map((result) => console.log(result.message.text));
   if (user.id !== "assistant") {
     // 1. transform stream-chat messages into a chatGPT messages
     const postChatGPTMessages = searchAPIResponseToPostChatGPTData(messages);
+    postChatGPTMessages.messages.map((chatGptmessages) =>
+      console.log(chatGptmessages.content)
+    );
     const response = await postChatGpt(postChatGPTMessages);
     const { choices } = response.data;
     const responseMessage = {
