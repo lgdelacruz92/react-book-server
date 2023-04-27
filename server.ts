@@ -17,6 +17,7 @@ import {
   getUserForChannel,
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
+import { upsertStreamChatUser } from "./services/upsert-stream-chat-user";
 
 require("dotenv").config();
 
@@ -87,7 +88,7 @@ app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
   const channel = streamChatInstance.channel("messaging", channel_id);
 
   const messages = await streamChatInstance.search(
-    { members: { $in: [channel_id, "assistant"] } },
+    { members: { $in: [user.id, "assistant"] } },
     { text: { $exists: true } },
     { limit: 100, offset: 0, sort: [{ updated_at: -1 }] }
   );

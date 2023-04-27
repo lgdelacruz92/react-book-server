@@ -13,7 +13,7 @@ const Users = {
     try {
       await usersDocRef.set({ ...userInfo });
       console.log(`User ${userId}`);
-      return;
+      return { ...userInfo };
     } catch (e) {
       console.error(`Error creating user ${userId}: ${e}`);
       throw e;
