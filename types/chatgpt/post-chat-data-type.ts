@@ -1,6 +1,6 @@
-import { MessageType } from "./message-type";
+import { MessageChatGPTType } from "./message-type";
 
-export interface PostChatDataType {
+export interface PostChatGPTDataType {
   model: "gpt-3.5-turbo";
-  messages: MessageType[];
+  messages: MessageChatGPTType[];
 }

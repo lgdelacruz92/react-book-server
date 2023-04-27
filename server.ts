@@ -5,12 +5,13 @@ import { chapters } from "./chapters/chapters";
 import cors from "cors";
 import { findInChapter } from "./utils/find-section";
 import bodyParser from "body-parser";
-import { postChat } from "./services/api/chatgpt";
+import { postChatGpt } from "./services/chat-gpt/post-chatgpt";
 import { sendStreamChatMessageResponse } from "./services/send-stream-chat-message";
 import { createStreamChatToken } from "./utils/stream-chat/create-stream-chat-token";
 import { startTutoring } from "./api/start-tutoring";
 import { stopTutoring } from "./api/stop-tutoring";
 import { streamChatInstance } from "./services/stream-chat-instance";
+import { searchAPIResponseToPostChatGPTData } from "./utils/stream-chat/search-api-response-to-post-chatgpt-data";
 
 require("dotenv").config();
 
@@ -42,7 +43,7 @@ app.get("/api/chapters/:fileName", (req: Request, res: Response) => {
 app.post("/api/chatgpt", async (req: Request, res: Response) => {
   const { messages, channelId, userToken } = req.body;
   try {
-    const response = await postChat({
+    const response = await postChatGpt({
       model: "gpt-3.5-turbo",
       messages,
     });
@@ -74,26 +75,32 @@ app.post("/api/streamchat/token", async (req: Request, res: Response) => {
 });
 
 app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
-  // console.log(req.body);
-
   // grab channel id from body
-  const { channel_id } = req.body;
+  const { channel_id, user } = req.body;
 
   // connect to channel
   const channel = streamChatInstance.channel("messaging", channel_id);
 
   const messages = await streamChatInstance.search(
-    { members: { $in: [channel_id] } },
+    { members: { $in: [channel_id, "assistant"] } },
     { text: { $exists: true } },
-    { limit: 100, offset: 0, sort: [{ updated_at: 1 }] }
+    { limit: 100, offset: 0, sort: [{ updated_at: -1 }] }
   );
 
-  // get channel messagese
-  console.log(messages);
-  // console.log(messages.results[0].message);
-  messages.results.map(({ message }) => {
-    console.log(message.text);
-  });
+  messages.results.reverse();
+
+  if (user.id !== "assistant") {
+    // 1. transform stream-chat messages into a chatGPT messages
+    const postChatGPTMessages = searchAPIResponseToPostChatGPTData(messages);
+    const response = await postChatGpt(postChatGPTMessages);
+    const { choices } = response.data;
+    const responseMessage = {
+      text: choices[0].message.content,
+      user: { id: "assistant" },
+    };
+    await channel.sendMessage(responseMessage);
+  }
+
   res.sendStatus(200);
 });
 

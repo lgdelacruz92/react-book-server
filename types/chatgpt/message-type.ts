@@ -1,4 +1,4 @@
-export interface MessageType {
+export interface MessageChatGPTType {
   role: string;
   content: string;
 }
