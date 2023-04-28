@@ -17,7 +17,10 @@ import {
   getUserForChannel,
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
-import AppStreamChat from "./services/stream-chat/stream-chat";
+import AppStreamChat from "@/services/stream-chat/stream-chat";
+console.log(
+  AppStreamChat.getChannelMembers("028aa002-6f75-4f19-8cf1-22b245039301")
+);
 
 require("dotenv").config();
 

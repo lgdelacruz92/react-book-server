@@ -18,11 +18,13 @@
     "openai": "^3.2.1",
     "stream-chat": "^8.6.0",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.13",
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.16.2",
     "@types/uuid": "^9.0.1"
   },
   "scripts": {

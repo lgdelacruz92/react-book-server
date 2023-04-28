@@ -1,10 +1,12 @@
-import { Role, UserResponse, ChannelMemberResponse } from "stream-chat";
+import { ChannelMemberResponse } from "stream-chat";
 
 export type User = {};
 
 export class AppStreamChatMember {
   user_id?: string;
-  constructor(user_id?: string) {}
+  constructor(user_id?: string) {
+    this.user_id = user_id;
+  }
   queryMessages() {}
 }
 

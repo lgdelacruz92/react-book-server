@@ -1,12 +1,26 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "ts-node": {
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "require": ["tsconfig-paths/register"],
     "compilerOptions": {
-      "module": "commonjs"
-    }
+      "target": "ES2021",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "incremental": true,
+      "module": "CommonJS",
+      "paths": {
+        "@/*": ["./src/*"]
+      },
+ 
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
   },
     "compilerOptions": {
       "target": "es5",
-      "lib": ["dom", "dom.iterable", "esnext"],
       "skipLibCheck": true,
       "strict": true,
       "noEmit": true,
@@ -16,9 +30,9 @@
       "resolveJsonModule": true,
       "isolatedModules": true,
       "incremental": true,
-      "sourceMap": true,
+      "baseUrl": ".",
       "paths": {
-        "@/*": ["./src/*"]
+        "@/*": ["src/*"]
       },
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
