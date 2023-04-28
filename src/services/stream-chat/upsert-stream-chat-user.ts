@@ -1,4 +1,4 @@
-import { streamChatInstance } from "./stream-chat-instance";
+import { streamChatInstance } from "./chat-instance";
 // const chatClient = StreamChat.getInstance(apiKey, apiSecret);
 // const assistantToken = chatClient.createToken(assistantId);
 

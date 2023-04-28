@@ -1,4 +1,5 @@
-import ChatInstance from "@/services/stream-chat/stream-chat-instance";
+import ChatInstance from "@/services/stream-chat/chat-instance";
+import { ChatChannel } from "./chat-channel";
 
 export class ChatUser {
   id: string;
@@ -38,8 +39,11 @@ export class ChatUser {
     };
   }
 
-  async connect(token: string): Promise<ChatUser> {
-    await ChatInstance.connectUser(this.json, token);
-    return this;
+  async getChannels(): Promise<ChatChannel[]> {
+    const channels = await ChatInstance.queryChannels({
+      members: { $in: [this.id] },
+    });
+
+    return channels.map((channel) => new ChatChannel(channel.id || ""));
   }
 }

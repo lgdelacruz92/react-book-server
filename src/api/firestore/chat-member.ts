@@ -1,18 +1,37 @@
 import { ChatChannel } from "@/models/chat/chat-channel";
 import { ChatUser } from "@/models/chat/chat-user";
 import { Request, Response } from "express";
-import ChatInstance from "@/services/stream-chat/stream-chat-instance";
+import ChatInstance from "@/services/stream-chat/chat-instance";
+import ChatChannelsManager from "@/models/chat/chat-channels-manager";
 
 export const putChatMember = async (req: Request, res: Response) => {
   const { token, channelId, userId } = req.params;
 
   try {
+    // Connect user
     const chatUser = new ChatUser(userId);
-    await chatUser.connect(token);
 
-    const channel = new ChatChannel(channelId);
-    const members = await channel.addMember(userId);
-    res.status(200).json(members);
+    const userChannels = await chatUser.getChannels();
+    const channelFilterMatchChannels = userChannels.filter(
+      (userChannel) => userChannel.channelId === channelId
+    );
+
+    // this means that
+    // channel is not created
+    if (channelFilterMatchChannels.length === 0) {
+      const chatChannelManager = new ChatChannelsManager();
+      await chatChannelManager.createChannel("messaging", channelId, {
+        name: "AI-Tutor",
+        members: ["assistant", userId],
+      });
+      const channel = new ChatChannel(channelId);
+      const members = await channel.getMembers();
+      res.status(200).json(members);
+    } else {
+      throw Error(
+        `This endpoint should not be called if user had already connected once.`
+      );
+    }
   } catch (e: any) {
     console.log(`Error adding member\nReason: ${e}`);
     res.status(500).send(e.message);

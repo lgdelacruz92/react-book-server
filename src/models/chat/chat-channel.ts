@@ -1,5 +1,5 @@
 import { ChatChannelMemberResponse } from "./chat-channel-member-response";
-import ChatInstance from "@/services/stream-chat/stream-chat-instance";
+import ChatInstance from "@/services/stream-chat/chat-instance";
 import { ChatMessage } from "./chat-message";
 
 export class ChatChannel {
@@ -26,6 +26,16 @@ export class ChatChannel {
     const channel = this.instance;
     try {
       const response = await channel.addMembers([userId]);
+      return new ChatChannelMemberResponse(response.members);
+    } catch (e) {
+      throw Error(`Could not add member\nReason: ${e}`);
+    }
+  }
+
+  async addMembers(userIds: string[]): Promise<ChatChannelMemberResponse> {
+    const channel = this.instance;
+    try {
+      const response = await channel.addMembers(userIds);
       return new ChatChannelMemberResponse(response.members);
     } catch (e) {
       throw Error(`Could not add member\nReason: ${e}`);

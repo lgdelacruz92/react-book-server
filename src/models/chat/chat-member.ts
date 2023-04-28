@@ -1,4 +1,4 @@
-import ChatInstance from "@/services/stream-chat/stream-chat-instance";
+import ChatInstance from "@/services/stream-chat/chat-instance";
 import { ChatMessage } from "./chat-message";
 import { ChatChannel } from "./chat-channel";
 import { ChatUser } from "./chat-user";
