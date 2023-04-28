@@ -3,9 +3,9 @@
       "target": "es5",
       "esModuleInterop": true,
 
-    },
-    "paths": {
-      "@/*": ["./*"]
+      "paths": {
+        "@/*": ["./*"]
+      },
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"]
