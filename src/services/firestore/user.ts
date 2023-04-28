@@ -29,7 +29,7 @@ const Users = {
 
     if (!doc.exists) {
       console.warn(`No user found`);
-      return null;
+      throw Error(`No user found with id ${userId}`);
     }
 
     return doc.data();

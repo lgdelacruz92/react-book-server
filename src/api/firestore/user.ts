@@ -21,6 +21,6 @@ export const getUser = async (req: Request, res: Response) => {
     const userInfo = await Users.getUser(userId);
     res.json({ ...userInfo });
   } catch (e) {
-    res.json(e);
+    res.status(404).json(null);
   }
 };
