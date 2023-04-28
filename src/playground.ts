@@ -8,8 +8,8 @@ const main = async () => {
   );
   const userMessagesResults = await Promise.all(memberMessages);
   userMessagesResults.forEach((userMessages) => {
-    userMessages.results.forEach((result: any) => {
-      console.log({ id: result.message.id, message: result.message.text });
+    userMessages.forEach((message) => {
+      console.log({ id: message.id, message: message.text });
     });
   });
 };
