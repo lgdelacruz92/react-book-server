@@ -5,13 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug server.ts",
             "type": "node",
             "request": "launch",
-            "name": "Debug Node.js App",
-            "program": "${workspaceFolder}/server.js",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "node",
-            "args": ["--inspect-brk"]
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": ["-r", "ts-node/register"],
+            "args": ["${workspaceRoot}/src/server.ts"]
+        },
+        {
+            "name": "Debug playground",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": ["-r", "ts-node/register"],
+            "args": ["${workspaceRoot}/src/playground.ts"]
         }
     ]
 }
