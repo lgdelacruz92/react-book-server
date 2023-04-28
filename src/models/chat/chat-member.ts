@@ -18,12 +18,13 @@ export class ChatMember {
       { limit: 100, offset: 0, sort: [{ updated_at: -1 }] }
     );
     return chatMessageResponse.results.map(({ message }) => {
-      const { id, text, user, channel } = message;
+      const { id, text, user, channel, created_at } = message;
       return new ChatMessage(
         id,
         text || "",
         user,
-        new ChatChannel(channel?.id || "")
+        new ChatChannel(channel?.id || ""),
+        created_at
       );
     });
   }
