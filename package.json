@@ -28,7 +28,7 @@
     "@types/uuid": "^9.0.1"
   },
   "scripts": {
-    "start": "npx tsc -p tsconfig.json && node src/server.js",
+    "start": "ts-node src/server.ts",
     "dev": "npx nodemon"
   }
 }

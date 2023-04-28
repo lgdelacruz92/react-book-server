@@ -1,27 +1,16 @@
 import express from "express";
 import { Request, Response } from "express";
-import fs from "fs";
 import { chapters } from "./chapters/chapters";
 import cors from "cors";
-import { findInChapter } from "./utils/find-section";
 import bodyParser from "body-parser";
-// import { postChatGpt } from "./services/chat-gpt/post-chatgpt";
-// import { sendStreamChatMessageResponse } from "./services/send-stream-chat-message";
-// import { createStreamChatToken } from "./utils/stream-chat/create-stream-chat-token";
 import { startTutoring } from "./api/start-tutoring";
 import { stopTutoring } from "./api/stop-tutoring";
-// import { streamChatInstance } from "./services/stream-chat-instance";
-import { searchAPIResponseToPostChatGPTData } from "./utils/stream-chat/search-api-response-to-post-chatgpt-data";
 import {
   createUserForChannel,
   getUserForChannel,
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
-import AppStreamChat from "@/services/stream-chat/stream-chat";
-console.log(
-  AppStreamChat.getChannelMembers("028aa002-6f75-4f19-8cf1-22b245039301")
-);
-
+import { userChat } from "./webhooks/user-chat";
 require("dotenv").config();
 
 const app = express();
@@ -30,15 +19,13 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/api/chapters", (req: Request, res: Response) => {
-  res.json(chapters);
-});
+app.post("/api/webhook/user-chat", userChat);
 
-app.post("/api/streamchat/token", async (req: Request, res: Response) => {
-  const { user } = req.body;
+// app.post("/api/streamchat/token", async (req: Request, res: Response) => {
+//   const { user } = req.body;
 
-  // res.json({ token: createStreamChatToken(user) });
-});
+// res.json({ token: createStreamChatToken(user) });
+// });
 
 // app.post("/api/webhook/streamchat", async (req: Request, res: Response) => {
 //   // grab channel id from body
