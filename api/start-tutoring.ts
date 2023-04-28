@@ -1,6 +1,6 @@
 import { upsertStreamChatUser } from "../services/upsert-stream-chat-user";
 import { streamChatInstance } from "../services/stream-chat-instance";
-import { createStreamChatToken } from "../services/create-stream-chat-token";
+import { createStreamChatToken } from "../services/stream-chat/create-stream-chat-token";
 
 // Define the `/api/start-tutoring` endpoint
 export const startTutoring = async (req, res) => {
