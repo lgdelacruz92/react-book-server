@@ -8,14 +8,36 @@ export class ChatChannel {
     this.channelId = channelId;
   }
 
+  get instance() {
+    return ChatInstance.channel("messaging", this.channelId);
+  }
+
   async getMembers(): Promise<ChatChannelMemberResponse> {
-    const channel = ChatInstance.channel("messaging", this.channelId);
+    const channel = this.instance;
     try {
       const response = await channel.queryMembers({});
       return new ChatChannelMemberResponse(response.members);
     } catch (e) {
       throw Error(`Could not query members\nReason: ${e}`);
     }
+  }
+
+  async addMember(userId: string): Promise<ChatChannelMemberResponse> {
+    const channel = this.instance;
+    try {
+      const response = await channel.addMembers([userId]);
+      return new ChatChannelMemberResponse(response.members);
+    } catch (e) {
+      throw Error(`Could not add member\nReason: ${e}`);
+    }
+  }
+
+  async isMember(userId: string): Promise<boolean> {
+    const { members } = await this.getMembers();
+    const findMemberResult = members.filter(
+      (member) => member.user_id === userId
+    );
+    return findMemberResult.length > 0;
   }
 
   async getChannelMessages(): Promise<ChatMessage[]> {

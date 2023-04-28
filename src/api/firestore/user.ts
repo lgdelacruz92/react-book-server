@@ -1,4 +1,4 @@
-import Users from "../../services/firestore/user";
+import Users from "@/services/firestore/user";
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
@@ -8,6 +8,7 @@ export const createUser = async (req: Request, res: Response) => {
     const userInfo = await Users.createUser(userId, {
       userId,
       channelId: uuidv4(),
+      token: uuidv4(),
     });
     res.json(userInfo).status(200);
   } catch (e) {
