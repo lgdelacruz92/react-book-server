@@ -9,7 +9,10 @@ import {
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
 import { userChat } from "./webhooks/user-chat";
-import { putChatMember } from "./api/firestore/chat-member";
+import {
+  postChatMemberToken,
+  putChatMember,
+} from "./api/firestore/chat-member";
 require("dotenv").config();
 
 const app = express();
@@ -33,6 +36,7 @@ app.get("/api/user/get/:userId", getUser);
 
 // channel
 app.put("/api/channel/:channelId/member/put/:userId/:token", putChatMember);
+app.post("/api/channel/member/token", postChatMemberToken);
 
 const port = 3003;
 app.listen(port, () => {

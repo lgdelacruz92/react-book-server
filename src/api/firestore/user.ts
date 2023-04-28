@@ -8,7 +8,6 @@ export const createUser = async (req: Request, res: Response) => {
     const userInfo = await Users.createUser(userId, {
       userId,
       channelId: uuidv4(),
-      token: uuidv4(),
     });
     res.json(userInfo).status(200);
   } catch (e) {
