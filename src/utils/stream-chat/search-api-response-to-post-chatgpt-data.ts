@@ -7,8 +7,8 @@ export const searchAPIResponseToPostChatGPTData = (
   return {
     model: "gpt-3.5-turbo",
     messages: messages.results.map((result) => ({
-      role: result.message.user.id === "assistant" ? "assistant" : "user",
-      content: result.message.text,
+      role: result.message.user?.id === "assistant" ? "assistant" : "user",
+      content: result.message.text || "",
     })),
   };
 };

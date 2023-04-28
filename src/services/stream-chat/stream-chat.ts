@@ -1,5 +1,5 @@
 import { StreamChat } from "stream-chat";
-import { ChannelMembersResponse } from "@/types/stream-chat/stream-chat.types";
+import { AppStreamChatChannelMemberResponse } from "@/types/stream-chat/stream-chat.types";
 require("dotenv").config();
 
 const streamChatInstance = StreamChat.getInstance(
@@ -9,11 +9,13 @@ const streamChatInstance = StreamChat.getInstance(
 
 const AppStreamChat = {
   instance: streamChatInstance,
-  getChannelMembers: async (channelId): Promise<ChannelMembersResponse> => {
+  getChannelMembers: async (
+    channelId: string
+  ): Promise<AppStreamChatChannelMemberResponse> => {
     const channel = streamChatInstance.channel("messaging", channelId);
     try {
       const response = await channel.queryMembers({});
-      return { ...response };
+      return new AppStreamChatChannelMemberResponse(response.members);
     } catch (e) {
       throw Error(`Could not query members\nReason: ${e}`);
     }

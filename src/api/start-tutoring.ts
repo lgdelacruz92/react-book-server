@@ -1,11 +1,9 @@
-import { upsertStreamChatUser } from "../services/upsert-stream-chat-user";
-import { streamChatInstance } from "../services/stream-chat-instance";
-import { createStreamChatToken } from "../services/stream-chat/create-stream-chat-token";
+import { Request, Response } from "express";
 
 // Define the `/api/start-tutoring` endpoint
-export const startTutoring = async (req, res) => {
-  const { channel_id } = req.body;
-  const assistant_id = "assistant";
+export const startTutoring = async (req: Request, res: Response) => {
+  // const { channel_id } = req.body;
+  // const assistant_id = "assistant";
 
   //   const connectedChannel = client.channel(
   //     "messaging",
@@ -56,6 +54,6 @@ export const startTutoring = async (req, res) => {
     res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message });
+    // res.status(500).json({ error: error.message });
   }
 };
