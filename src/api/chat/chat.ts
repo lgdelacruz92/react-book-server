@@ -38,11 +38,25 @@ export const putChatMember = async (req: Request, res: Response) => {
   }
 };
 
-export const postChatMemberToken = async (req: Request, res: Response) => {
+export const postChatToken = async (req: Request, res: Response) => {
   const { userId } = req.body;
   try {
     const token = await ChatInstance.createToken(userId);
     res.status(200).json({ token });
+  } catch (e: any) {
+    console.log(`Error creating token\nReason: ${e}`);
+    res.status(500).json(e.message);
+  }
+};
+
+export const postCreateChat = async (req: Request, res: Response) => {
+  const { channelId, userIds } = req.body;
+  try {
+    const channel = ChatInstance.channel("messaging", channelId, {
+      members: [...userIds],
+    });
+    await channel.create();
+    res.status(200);
   } catch (e: any) {
     console.log(`Error creating token\nReason: ${e}`);
     res.status(500).json(e.message);

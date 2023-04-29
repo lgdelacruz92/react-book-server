@@ -9,10 +9,7 @@ import {
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
 import { userChat } from "./webhooks/user-chat";
-import {
-  postChatMemberToken,
-  putChatMember,
-} from "./api/firestore/chat-member";
+import { postChatToken, postCreateChat, putChatMember } from "./api/chat/chat";
 require("dotenv").config();
 
 const app = express();
@@ -37,8 +34,9 @@ app.get("/api/user/get/:userId", getUser);
 // chat
 // Todo: Chat is better name than channel
 // app.post("/api/channel/create", createChannel) // pass (usertoken, members, )
-app.put("/api/channel/:channelId/member/put/:userId/:token", putChatMember);
-app.post("/api/chat/token", postChatMemberToken); // modify this
+// app.put("/api/channel/:channelId/member/put/:userId/:token", putChatMember);
+app.post("/api/chat/token", postChatToken);
+app.post("/api/chat/create", postCreateChat);
 
 const port = 3003;
 app.listen(port, () => {
