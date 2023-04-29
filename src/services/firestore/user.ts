@@ -19,20 +19,22 @@ const Users = {
       throw e;
     }
   },
-  getUser: async (userId: string) => {
-    if (userId.length === 0) {
+  getUser: async (authUserId: string) => {
+    if (authUserId.length === 0) {
       throw new Error("Invalid channelId");
     }
 
-    const usersDocRef = db.collection(collectionName).doc(userId);
-    const doc = await usersDocRef.get();
+    const usersDocRef = db
+      .collection(collectionName)
+      .where("authUserId", "=", authUserId);
+    const queryResult = await usersDocRef.get();
 
-    if (!doc.exists) {
+    if (queryResult.size === 0) {
       console.warn(`No user found`);
-      throw Error(`No user found with id ${userId}`);
+      return null;
     }
 
-    return doc.data();
+    return queryResult.docs[0].data();
   },
 };
 

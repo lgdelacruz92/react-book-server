@@ -29,7 +29,7 @@ app.get("/api/channel-user-repository/get/:channelId", getUserForChannel);
 
 // user
 app.post("/api/user/create", createUser);
-app.get("/api/user/get/:userId", getUser);
+app.get("/api/user/get/:authUserId", getUser);
 
 // chat
 // Todo: Chat is better name than channel
