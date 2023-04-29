@@ -1,4 +1,4 @@
-import { streamChatInstance } from "./chat-instance";
+import ChatInstance from "./chat-instance";
 // const chatClient = StreamChat.getInstance(apiKey, apiSecret);
 // const assistantToken = chatClient.createToken(assistantId);
 
@@ -18,7 +18,7 @@ import { streamChatInstance } from "./chat-instance";
 // }
 
 export const upsertStreamChatUser = async (userId: string) => {
-  await streamChatInstance.upsertUser({
+  await ChatInstance.upsertUser({
     id: userId,
     name: "Assistant",
   });
