@@ -1,5 +1,11 @@
 import { ChatChannel } from "@/models/chat/chat-channel";
+import { ChatMessage } from "@/models/chat/chat-message";
+import { ChatUser } from "@/models/chat/chat-user";
+import { postChatGpt } from "@/services/chat-gpt/post-chatgpt";
+import { MessageChatGPTType } from "@/types/chatgpt/message-type";
+import { PostChatGPTDataType } from "@/types/chatgpt/post-chat-data-type";
 import { Request, Response } from "express";
+import { v4 } from "uuid";
 
 export const userChat = async (req: Request, res: Response) => {
   // get the messages from the channel
@@ -7,7 +13,35 @@ export const userChat = async (req: Request, res: Response) => {
     const { channel_id } = req.body;
     const channel = new ChatChannel(channel_id);
     const messages = await channel.getChannelMessages();
-    res.json({ messages });
+
+    // Transform messages into something that can be sent
+    // to chatGpt
+    const messagesChatGptFormat: MessageChatGPTType[] = messages.map(
+      (message) => {
+        return {
+          role:
+            message.user && message.user.id === "assistant"
+              ? "assistant"
+              : "user",
+          content: message.text,
+        };
+      }
+    );
+    const chatGPTPayload: PostChatGPTDataType = {
+      model: "gpt-3.5-turbo",
+      messages: [...messagesChatGptFormat],
+    };
+    const chatGPTResponse = await postChatGpt(chatGPTPayload);
+
+    await channel.sendMessage(
+      new ChatMessage(
+        v4(),
+        chatGPTResponse.content,
+        new ChatUser(chatGPTResponse.role)
+      )
+    );
+
+    res.status(200).json(chatGPTResponse);
   } catch (e: any) {
     console.log(e);
     res.status(500).send(e.message);

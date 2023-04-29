@@ -75,4 +75,11 @@ export class ChatChannel {
     );
     return chatMessages;
   }
+
+  async sendMessage(message: ChatMessage): Promise<void> {
+    await this.instance.sendMessage({
+      user_id: message.user?.id,
+      text: message.text,
+    });
+  }
 }

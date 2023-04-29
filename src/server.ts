@@ -9,7 +9,7 @@ import {
 } from "./api/firestore/channel-user-repository";
 import { createUser, getUser } from "./api/firestore/user";
 import { userChat } from "./webhooks/user-chat";
-import { postChatToken, postCreateChat, putChatMember } from "./api/chat/chat";
+import { postChatToken, postCreateChat } from "./api/chat/chat";
 require("dotenv").config();
 
 const app = express();
