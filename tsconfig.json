@@ -20,16 +20,15 @@
   },
   "compilerOptions": {
     "target": "es6",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "strict": true,
+    "module": "commonjs",
+    "outDir": "dist",
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
   },
-  "include": ["./src/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
   

@@ -25,7 +25,8 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.16.2",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "tsc-alias": "^1.8.6"
   },
   "scripts": {
     "start": "ts-node src/server.ts",
