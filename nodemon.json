@@ -1,6 +1,0 @@
-{
-    "watch": ["./"],
-    "ext": "ts",
-    "ignore": ["src/**/*.spec.ts","node_modules/",".vscode/"],
-    "exec": "ts-node src/server.ts"
-  }
