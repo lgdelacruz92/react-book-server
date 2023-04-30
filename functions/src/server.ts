@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { startTutoring } from "./api/start-tutoring";
-import { stopTutoring } from "./api/stop-tutoring";
 import {
   createUserForChannel,
   getUserForChannel,
@@ -20,9 +18,6 @@ app.use(bodyParser.json());
 
 app.post("/api/webhook/user-chat", userChat);
 
-app.post("/api/start-tutoring", startTutoring);
-app.post("/api/stop-tutoring", stopTutoring);
-
 // Firestore
 app.post("/api/channel-user-repository/create", createUserForChannel);
 app.get("/api/channel-user-repository/get/:channelId", getUserForChannel);
@@ -38,7 +33,8 @@ app.get("/api/user/get/:authUserId", getUser);
 app.post("/api/chat/token", postChatToken);
 app.post("/api/chat/create", postCreateChat);
 
-const port = 3003;
-app.listen(port, () => {
-  console.log("Server listening on port " + port);
-});
+// const port = 3003;
+// app.listen(port, () => {
+//   console.log("Server listening on port " + port);
+// });
+export { app };

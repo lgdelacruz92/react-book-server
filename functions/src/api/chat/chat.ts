@@ -5,7 +5,7 @@ import ChatInstance from "@/services/stream-chat/chat-instance";
 import ChatChannelsManager from "@/models/chat/chat-channels-manager";
 
 export const putChatMember = async (req: Request, res: Response) => {
-  const { token, channelId, userId } = req.params;
+  const { channelId, userId } = req.params;
 
   try {
     // Connect user

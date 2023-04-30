@@ -1,6 +1,4 @@
 import ChatInstance from "@/services/stream-chat/chat-instance";
-import { ChatChannel } from "./chat-channel";
-import { ChannelFilters, ChannelSort, ChannelOptions } from "stream-chat";
 
 type CreateChannelOptions = {
   name?: string;

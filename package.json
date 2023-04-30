@@ -29,7 +29,7 @@
     "tsc-alias": "^1.8.6"
   },
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "dev": "npx nodemon"
   }
 }
