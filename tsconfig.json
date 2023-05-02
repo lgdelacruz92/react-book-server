@@ -10,6 +10,7 @@
     "target": "es2017",
     "baseUrl": ".",
     "esModuleInterop": true,
+    "incremental": true,
     "paths": {
       "@/*": ["src/*"]
     }
