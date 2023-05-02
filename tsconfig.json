@@ -16,6 +16,6 @@
   },
   "compileOnSave": true,
   "include": [
-    "src"
+    "src", ".eslintrc.js", "firebase.json", "package.json","firestore.indexes.json"
   ]
 }
