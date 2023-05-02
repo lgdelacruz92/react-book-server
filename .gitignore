@@ -15,3 +15,5 @@ ui-debug.log
 yarn-error.log
 tsconfig.dev.json
 .env*
+
+*.tmp.txt
