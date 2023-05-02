@@ -1,7 +1,17 @@
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
 node_modules/
-**/*.js
-.env
+
 serviceAccountKey.json
-functions/lib/*
+.runtimeconfig.json
 .firebase
 ui-debug.log
+yarn-error.log
+tsconfig.dev.json
+.env*
