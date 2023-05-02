@@ -45,7 +45,7 @@ export class ChatChannel {
   async isMember(userId: string): Promise<boolean> {
     const { members } = await this.getMembers();
     const findMemberResult = members.filter(
-      (member) => member.user_id === userId
+      (member) => member.userId === userId
     );
     return findMemberResult.length > 0;
   }
@@ -70,8 +70,8 @@ export class ChatChannel {
     }
     chatMessages.sort(
       (a, b) =>
-        new Date(a.created_at || "").getTime() -
-        new Date(b.created_at || "").getTime()
+        new Date(a.createdAt || "").getTime() -
+        new Date(b.createdAt || "").getTime()
     );
     return chatMessages;
   }

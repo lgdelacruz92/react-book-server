@@ -29,12 +29,12 @@ export const putChatMember = async (req: Request, res: Response) => {
       res.status(200).json(members);
     } else {
       throw Error(
-        `This endpoint should not be called if user had already connected once.`
+        "This endpoint should not be called if user had already connected once."
       );
     }
-  } catch (e: any) {
+  } catch (e) {
     console.log(`Error adding member\nReason: ${e}`);
-    res.status(500).send(e.message);
+    res.status(500).send(e);
   }
 };
 
@@ -43,9 +43,9 @@ export const postChatToken = async (req: Request, res: Response) => {
   try {
     const token = await ChatInstance.createToken(userId);
     res.status(200).json({ token });
-  } catch (e: any) {
+  } catch (e) {
     console.log(`Error creating token\nReason: ${e}`);
-    res.status(500).json(e.message);
+    res.status(500).json(e);
   }
 };
 
@@ -57,8 +57,8 @@ export const postCreateChat = async (req: Request, res: Response) => {
     });
     await channel.create();
     res.status(200);
-  } catch (e: any) {
+  } catch (e) {
     console.log(`Error creating token\nReason: ${e}`);
-    res.status(500).json(e.message);
+    res.status(500).json(e);
   }
 };

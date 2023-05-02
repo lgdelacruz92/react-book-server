@@ -4,25 +4,25 @@ import { ChatChannel } from "./chat-channel";
 export class ChatUser {
   id: string;
   role?: string;
-  created_at?: string;
-  updated_at?: string;
-  last_active?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  lastActive?: string;
   banned?: boolean;
   online?: boolean;
   constructor(
     id: string,
     role?: string,
-    created_at?: string,
-    updated_at?: string,
-    last_active?: string,
+    createdAt?: string,
+    updatedAt?: string,
+    lastActive?: string,
     banned?: boolean,
     online?: boolean
   ) {
     this.id = id;
     this.role = role;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.last_active = last_active;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.lastActive = lastActive;
     this.banned = banned;
     this.online = online;
   }
@@ -31,9 +31,9 @@ export class ChatUser {
     return {
       id: this.id,
       role: this.role,
-      created_at: this.created_at,
-      updated_at: this.updated_at,
-      last_active: this.last_active,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      lastActive: this.lastActive,
       banned: this.banned,
       online: this.online,
     };

@@ -1,0 +1,8 @@
+{
+  "app": {
+    "chat_gpt_api_key": "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",
+    "chat_gpt_api_url": "https://api.openai.com/v1/chat/completions",
+    "stream_chat_secret": "aw4r9pmkwfyhhztz38xce6tcd32tyxcvyatkmgnp5f3vkdt6v42auuhwbf3f37mf",
+    "stream_chat_key": "nf84egcdpf3m"
+  }
+}

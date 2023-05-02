@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import {
   createUserForChannel,
   getUserForChannel,
@@ -8,13 +7,12 @@ import {
 import { createUser, getUser } from "./api/firestore/user";
 import { userChat } from "./webhooks/user-chat";
 import { postChatToken, postCreateChat } from "./api/chat/chat";
-require("dotenv").config();
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.post("/api/webhook/user-chat", userChat);
 

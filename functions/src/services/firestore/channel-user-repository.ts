@@ -32,7 +32,7 @@ const ChannelUserRepository = {
       return null;
     }
 
-    return doc.data().userId;
+    return doc.data()?.userId;
   },
 };
 

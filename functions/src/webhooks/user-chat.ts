@@ -10,6 +10,7 @@ import { v4 } from "uuid";
 export const userChat = async (req: Request, res: Response) => {
   // get the messages from the channel
   try {
+    // eslint-disable-next-line camelcase
     const { channel_id, user } = req.body;
     if (user.id !== "assistant") {
       const channel = new ChatChannel(channel_id);
@@ -46,8 +47,8 @@ export const userChat = async (req: Request, res: Response) => {
     } else {
       res.status(200);
     }
-  } catch (e: any) {
+  } catch (e) {
     console.log(e);
-    res.status(500).send(e.message);
+    res.status(500).send(e);
   }
 };

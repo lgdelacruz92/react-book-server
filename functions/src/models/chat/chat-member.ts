@@ -4,24 +4,24 @@ import { ChatChannel } from "./chat-channel";
 import { ChatUser } from "./chat-user";
 
 export class ChatMember {
-  user_id: string;
-  constructor(user_id?: string) {
-    this.user_id = user_id || "";
+  userId: string;
+  constructor(userId?: string) {
+    this.userId = userId || "";
   }
   async queryMessages(): Promise<ChatMessage[]> {
     const chatMessageResponse = await ChatInstance.search(
       {
         members: {
-          $in: [this.user_id],
+          $in: [this.userId],
         },
       },
       { text: { $exists: true } },
       { limit: 100, offset: 0, sort: [{ updated_at: -1 }] }
     );
     return chatMessageResponse.results.map(({ message }) => {
-      const { id, text, user, channel, created_at } = message;
+      const { id, text, user, channel, created_at: createdAt } = message;
       if (!user || !user.id) {
-        throw Error(`User id cannot be empty.`);
+        throw Error("User id cannot be empty.");
       }
       return new ChatMessage(
         id,
@@ -36,7 +36,7 @@ export class ChatMember {
           user?.online
         ),
         new ChatChannel(channel?.id || ""),
-        created_at
+        createdAt
       );
     });
   }

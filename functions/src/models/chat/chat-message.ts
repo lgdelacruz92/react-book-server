@@ -6,18 +6,18 @@ export class ChatMessage {
   text: string;
   user?: ChatUser | null;
   channel?: ChatChannel | null;
-  created_at?: string | null;
+  createdAt?: string | null;
   constructor(
     id: string,
     text: string,
     user?: ChatUser | null,
     channel?: ChatChannel | null,
-    created_at?: string | null
+    createdAt?: string | null
   ) {
     this.id = id;
     this.text = text;
     this.user = user;
     this.channel = channel;
-    this.created_at = created_at;
+    this.createdAt = createdAt;
   }
 }

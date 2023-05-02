@@ -1,9 +1,9 @@
 import { StreamChat } from "stream-chat";
-require("dotenv").config();
+import { appConfig } from "@/services/firebase/config";
 
 const ChatInstance = StreamChat.getInstance(
-  process.env.STREAMCHAT_KEY || "",
-  process.env.STREAMCHAT_SECRET || ""
+  appConfig.app.stream_chat_key || "",
+  appConfig.app.stream_chat_secret || ""
 );
 
 export default ChatInstance;

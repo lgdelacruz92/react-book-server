@@ -26,11 +26,11 @@ const Users = {
 
     const usersDocRef = db
       .collection(collectionName)
-      .where("authUserId", "=", authUserId);
+      .where("authUserId", "==", authUserId);
     const queryResult = await usersDocRef.get();
 
     if (queryResult.size === 0) {
-      console.warn(`No user found`);
+      console.warn("No user found");
       return null;
     }
 
