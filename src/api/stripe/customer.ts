@@ -1,5 +1,6 @@
 import { StripeCustomer } from "@/services/stripe/stripe.types";
 import { appConfig } from "@/services/firebase/config";
+import { post } from "../post";
 
 type CreateCustomerDataType = {
   email: string;
