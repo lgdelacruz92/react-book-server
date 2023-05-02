@@ -1,6 +1,6 @@
-import { StripeCustomer } from "@/services/stripe/stripe.types";
+import { StripeCustomer } from "@/types/stripe.types";
 import { appConfig } from "@/services/firebase/config";
-import { post } from "../post";
+import { post } from "./post";
 
 type CreateCustomerDataType = {
   email: string;
@@ -13,6 +13,6 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export const createCustomer = async (data: CreateCustomerDataType) => {
+export const createStripeCustomer = async (data: CreateCustomerDataType) => {
   return post<CreateCustomerDataType, StripeCustomer>(url, data, { headers });
 };

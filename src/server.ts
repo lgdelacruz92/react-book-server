@@ -7,6 +7,7 @@ import {
 import { createUser, getUser } from "./api/firestore/user";
 import { userChat } from "./webhooks/user-chat";
 import { postChatToken, postCreateChat } from "./api/chat/chat";
+import { stripeRoutes } from "./routes";
 
 const app = express();
 
@@ -26,5 +27,7 @@ app.get("/api/user/get/:authUserId", getUser);
 
 app.post("/api/chat/token", postChatToken);
 app.post("/api/chat/create", postCreateChat);
+
+app.use("/api/stripe", stripeRoutes);
 
 export { app };
