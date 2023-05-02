@@ -24,15 +24,7 @@ app.get("/api/channel-user-repository/get/:channelId", getUserForChannel);
 app.post("/api/user/create", createUser);
 app.get("/api/user/get/:authUserId", getUser);
 
-// chat
-// Todo: Chat is better name than channel
-// app.post("/api/channel/create", createChannel) // pass (usertoken, members, )
-// app.put("/api/channel/:channelId/member/put/:userId/:token", putChatMember);
 app.post("/api/chat/token", postChatToken);
 app.post("/api/chat/create", postCreateChat);
 
-// const port = 3003;
-// app.listen(port, () => {
-//   console.log("Server listening on port " + port);
-// });
 export { app };
