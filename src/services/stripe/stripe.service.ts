@@ -11,8 +11,30 @@ interface CreateCustomerType {
   // Add more optional properties here as needed
 }
 
+type StripeCustomerMetadata = Stripe.CustomerUpdateParams | undefined;
+
 export const createStripeCustomer = async (
   customer: CreateCustomerType
 ): Promise<Stripe.Customer> => {
   return await stripe.customers.create(customer);
+};
+
+export const getStripeCustomer = async (
+  stripeCustomerId: string
+): Promise<Stripe.Customer> => {
+  // Retrieve your existing customer object using the customer ID from the session
+  const retrieveResponse = await stripe.customers.retrieve(stripeCustomerId);
+
+  if ("deleted" in retrieveResponse && retrieveResponse.deleted) {
+    throw new Error("Customer not found");
+  }
+
+  return retrieveResponse as Stripe.Customer;
+};
+
+export const updateStripeCustomer = async (
+  stripeCustomerId: string,
+  metadata?: StripeCustomerMetadata
+) => {
+  return await stripe.customers.update(stripeCustomerId, metadata);
 };

@@ -1,4 +1,4 @@
-import { UserInfoType } from "../../types/firestore/user-info.types";
+import { UserInfoType } from "@/types/firestore/user-info.types";
 import db from "./db.service";
 
 const collectionName = "users";
@@ -11,7 +11,6 @@ export const createUser = async (userId: string, userInfo: UserInfoType) => {
   const usersDocRef = db.collection(collectionName).doc(userId);
   try {
     await usersDocRef.set({ ...userInfo });
-    console.log(`User ${userId}`);
     return { ...userInfo };
   } catch (e) {
     console.error(`Error creating user ${userId}: ${e}`);
@@ -21,7 +20,7 @@ export const createUser = async (userId: string, userInfo: UserInfoType) => {
 
 export const getUser = async (authUserId: string) => {
   if (authUserId.length === 0) {
-    throw new Error("Invalid channelId");
+    throw new Error("Invalid authUserId");
   }
 
   const usersDocRef = db
@@ -35,4 +34,18 @@ export const getUser = async (authUserId: string) => {
   }
 
   return queryResult.docs[0].data();
+};
+
+export const putUser = async (
+  authUserId: string,
+  userProp: Partial<UserInfoType>
+) => {
+  if (authUserId.length === 0) {
+    throw new Error("Invalid channelId");
+  }
+
+  const docRef = db.collection(collectionName).doc(authUserId);
+
+  // Update a property in the document
+  await docRef.update(userProp);
 };

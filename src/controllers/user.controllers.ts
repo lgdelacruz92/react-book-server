@@ -1,6 +1,7 @@
 import {
   createUser as createUserService,
   getUser as getUserService,
+  putUser as putUserService,
 } from "@/services/firebase/user.service";
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
@@ -27,5 +28,16 @@ export const getUser = async (req: Request, res: Response) => {
     res.json({ ...userInfo });
   } catch (e) {
     res.status(404).json(null);
+  }
+};
+
+export const putUser = async (req: Request, res: Response) => {
+  const { authUserId } = req.params;
+  const { props } = req.body;
+  try {
+    const writeResult = await putUserService(authUserId, props);
+    res.status(200).json(writeResult);
+  } catch (e) {
+    res.status(500).send(e);
   }
 };

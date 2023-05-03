@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { createStripeCustomer as createStripeCustomerService } from "@/services/stripe/stripe.service";
 import { Stripe } from "stripe";
-import { handleCheckoutSessionCompleted } from "@/services/stripe/stripe.webhook";
+import { handleCheckoutSessionCompleted } from "@/services/stripe-user/stripe-user.service";
+import { getAuthToken } from "@/utils/get-auth-token";
 
 // customers
 export const createStripeCustomer = async (req: Request, res: Response) => {
@@ -16,9 +17,13 @@ export const createStripeCustomer = async (req: Request, res: Response) => {
 // events
 export const postEvent = async (req: Request, res: Response) => {
   const event: Stripe.Event = req.body;
+  const authorization = getAuthToken(req.headers.authorization || "");
   if (event.type === "checkout.session.completed") {
     try {
-      const customer = await handleCheckoutSessionCompleted(event);
+      const customer = await handleCheckoutSessionCompleted(
+        event,
+        authorization
+      );
       res.status(200).json(customer);
     } catch (e) {
       res.send(500).send(e);
