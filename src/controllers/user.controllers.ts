@@ -1,4 +1,7 @@
-import Users from "@/services/firebase/user.service";
+import {
+  createUser as createUserService,
+  getUser as getUserService,
+} from "@/services/firebase/user.service";
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
@@ -6,7 +9,7 @@ export const createUser = async (req: Request, res: Response) => {
   const { userId } = req.body;
   try {
     const newUserId = uuidv4();
-    const userInfo = await Users.createUser(newUserId, {
+    const userInfo = await createUserService(newUserId, {
       userId: newUserId,
       channelId: uuidv4(),
       authUserId: userId,
@@ -20,7 +23,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const getUser = async (req: Request, res: Response) => {
   const { authUserId } = req.params;
   try {
-    const userInfo = await Users.getUser(authUserId);
+    const userInfo = await getUserService(authUserId);
     res.json({ ...userInfo });
   } catch (e) {
     res.status(404).json(null);
