@@ -13,7 +13,6 @@ if (process.env.LOCAL_DEBUGGING === "true") {
       stream_chat_key: process.env.STREAMCHAT_KEY || "",
     },
   };
-  console.log(appConfig);
 } else {
   appConfig = config();
 }

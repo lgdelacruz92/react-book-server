@@ -31,3 +31,10 @@ app.post("/api/chat/create", postCreateChat);
 app.use("/api/stripe", stripeRoutes);
 
 export { app };
+
+if (process.env.LOCAL_DEBUGGING === "true") {
+  const port = 5000;
+  app.listen(port, () => {
+    console.log(`app listening at http://localhost:${port}`);
+  });
+}

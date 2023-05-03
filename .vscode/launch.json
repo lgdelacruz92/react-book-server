@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "runtimeArgs": ["-r", "ts-node/register"],
+            "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
             "args": ["${workspaceRoot}/src/server.ts"],
             "env": {
                 "LOCAL_DEBUGGING": "true"

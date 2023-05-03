@@ -20,8 +20,8 @@ export const handleCheckoutSessionCompleted = async (event: Stripe.Event) => {
   // For example, adding a note to the customer's metadata:
   await stripe.customers.update(customer.id, {
     metadata: {
-      ...customer.metadata,
-      paymentLinkNote: `Payment made using Payment Link for ${session.line_items.data[0].description}`,
+      //   ...customer.metadata,
+      //   paymentLinkNote: `Payment made using Payment Link for ${session.line_items.data[0].description}`,
     },
   });
 };
