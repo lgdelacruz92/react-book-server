@@ -1,5 +1,5 @@
 import { ChatChannelMemberResponse } from "./chat-channel-member-response";
-import ChatInstance from "@/services/stream-chat/chat-instance";
+import ChatInstance from "@/services/chat/chat.service";
 import { ChatMessage } from "./chat-message";
 
 export class ChatChannel {
