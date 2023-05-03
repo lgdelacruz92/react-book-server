@@ -27,7 +27,7 @@ export const getUser = async (req: Request, res: Response) => {
     const userInfo = await getUserService(authUserId);
     res.json({ ...userInfo });
   } catch (e) {
-    res.status(404).json(null);
+    res.status(404).json(e);
   }
 };
 
