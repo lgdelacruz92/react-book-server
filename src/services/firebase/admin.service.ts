@@ -7,7 +7,4 @@ const configuration =
   process.env.LOCAL_DEBUGGING === "true" ? localConfiguration : undefined;
 
 admin.initializeApp(configuration);
-
-const db = admin.firestore();
-
-export default db;
+export default admin;

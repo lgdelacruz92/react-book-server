@@ -1,5 +1,5 @@
 import { UserInfoType } from "../../types/firestore/user-info.types";
-import db from "./db";
+import db from "./db.service";
 
 const collectionName = "users";
 
