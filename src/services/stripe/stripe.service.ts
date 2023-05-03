@@ -38,3 +38,23 @@ export const updateStripeCustomer = async (
 ) => {
   return await stripe.customers.update(stripeCustomerId, metadata);
 };
+
+// Checkout Sessions
+export const createCheckoutSession = async (
+  options: Stripe.Checkout.SessionCreateParams
+) => {
+  return await stripe.checkout.sessions.create(options);
+};
+
+export const expireCheckoutSession = async (
+  csSessionId: string
+): Promise<Stripe.Response<Stripe.Checkout.Session>> => {
+  return await stripe.checkout.sessions.expire(csSessionId);
+};
+
+// Products
+export const getProducts = async (): Promise<
+  Stripe.Response<Stripe.ApiList<Stripe.Product>>
+> => {
+  return await stripe.products.list();
+};
