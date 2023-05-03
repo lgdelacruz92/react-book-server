@@ -3,7 +3,7 @@ import {
   getStripeCustomer,
   updateStripeCustomer,
 } from "@/services/stripe/stripe.service";
-import { verifyUser } from "@/services/firebase/admin.service";
+import { verifyUser } from "@/services/firebase/auth.service";
 import { getUser, putUser } from "@/services/firebase/user.service";
 
 export const handleCheckoutSessionCompleted = async (
