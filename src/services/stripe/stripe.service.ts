@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { appConfig } from "./firebase/config";
+import { appConfig } from "../firebase/config";
 
 const stripe = new Stripe(appConfig.app.stripe_secret_key, {
   apiVersion: "2022-11-15",

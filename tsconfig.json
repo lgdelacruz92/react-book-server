@@ -1,4 +1,14 @@
 {
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2017",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      }
+    },
+  },
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitReturns": true,

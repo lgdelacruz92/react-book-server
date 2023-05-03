@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createStripeCustomer as createStripeCustomerService } from "@/services/stripe.service";
+import { createStripeCustomer as createStripeCustomerService } from "@/services/stripe/stripe.service";
 
 export const createStripeCustomer = async (req: Request, res: Response) => {
   try {

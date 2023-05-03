@@ -10,7 +10,10 @@
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "runtimeArgs": ["-r", "ts-node/register"],
-            "args": ["${workspaceRoot}/src/server.ts"]
+            "args": ["${workspaceRoot}/src/server.ts"],
+            "env": {
+                "LOCAL_DEBUGGING": "true"
+            }
         },
         {
             "name": "Debug playground",
