@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 export const createUser = async (req: Request, res: Response) => {
   const { userId } = req.body;
   try {
+    // This should be more general to pass the props haha
     const newUserId = uuidv4();
     const userInfo = await createUserService(newUserId, {
       userId: newUserId,
