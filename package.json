@@ -8,7 +8,8 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions,hosting",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "dev": "LOCAL_DEBUGGING=true node -r ts-node/register -r tsconfig-paths/register src/server.ts"
   },
   "engines": {
     "node": "16"
