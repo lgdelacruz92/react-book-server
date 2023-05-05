@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { userChat } from "./webhooks/user-chat";
-import { chatRoutes, stripeRoutes, userRoutes } from "./routes";
+import { authRoutes, chatRoutes, stripeRoutes, userRoutes } from "./routes";
 
 const app = express();
 
@@ -15,6 +15,9 @@ app.post("/api/webhook/user-chat", userChat);
 
 // user
 app.use("/api/user", userRoutes);
+
+// auth
+app.use("/api/auth", authRoutes);
 
 // chat
 app.use("/api/chat", chatRoutes);
