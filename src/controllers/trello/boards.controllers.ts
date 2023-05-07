@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getBoard as getBoardService } from "@/services/trello/trello.services";
 
+// boards
 export const getBoard = async (req: Request, res: Response) => {
   try {
     const { boardId } = req.params;

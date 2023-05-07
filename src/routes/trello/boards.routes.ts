@@ -1,4 +1,4 @@
-import { getBoard } from "@/controllers/trello.controllers";
+import { getBoard } from "@/controllers/trello/boards.controllers";
 import express from "express";
 
 const router = express.Router();
