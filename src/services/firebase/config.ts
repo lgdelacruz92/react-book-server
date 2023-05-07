@@ -11,6 +11,8 @@ if (process.env.LOCAL_DEBUGGING === "true") {
       stream_chat_secret: process.env.STREAMCHAT_SECRET || "",
       chat_gpt_api_url: process.env.CHATGPT_API_URL || "",
       stream_chat_key: process.env.STREAMCHAT_KEY || "",
+      trello_key: process.env.TRELLO_KEY || "",
+      trello_token: process.env.TRELLO_TOKEN || "",
     },
   };
 } else {
