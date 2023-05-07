@@ -6,7 +6,7 @@ import {
   authRoutes,
   chatRoutes,
   stripeRoutes,
-  trelloRouters,
+  trelloRoutes,
   userRoutes,
 } from "./routes";
 
@@ -32,7 +32,7 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/stripe", stripeRoutes);
 
 // trello
-app.use("/api/trello", trelloRouters);
+app.use("/api/trello", trelloRoutes);
 
 export { app };
 

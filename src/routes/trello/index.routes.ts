@@ -1,3 +1,9 @@
-import boardRoutes from "./boards.routes";
+import express from "express";
+import BoardsRouter from "./boards/index.routes";
 
-export { boardRoutes };
+const router = express.Router();
+
+// routes here
+router.use("/boards", BoardsRouter);
+
+export default router;
