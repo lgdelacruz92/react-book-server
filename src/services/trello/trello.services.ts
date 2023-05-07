@@ -1,2 +1,2 @@
-import { getBoard, getBoards } from "./boards/boards.services";
-export { getBoard, getBoards };
+import { getBoard } from "./boards/boards.services";
+export { getBoard };

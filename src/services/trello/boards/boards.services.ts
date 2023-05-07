@@ -90,8 +90,3 @@ export const getBoard = async (boardId: string): Promise<TrelloBoard> => {
   );
   return response.data;
 };
-
-export const getBoards = async (): Promise<TrelloBoard[]> => {
-  const response = await get<TrelloBoard[]>(`${trelloApi}/boards?${queryAuth}`);
-  return response.data;
-};

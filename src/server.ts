@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 
 import { userChat } from "./webhooks/user-chat";
@@ -9,6 +9,7 @@ import {
   trelloRoutes,
   userRoutes,
 } from "./routes";
+import { AxiosError } from "axios";
 
 const app = express();
 
@@ -33,6 +34,26 @@ app.use("/api/stripe", stripeRoutes);
 
 // trello
 app.use("/api/trello", trelloRoutes);
+
+type ServerError = {
+  status?: number;
+  message?: string;
+};
+// Error handling middleware
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+app.use((err: any, _: Request, res: Response, next: NextFunction) => {
+  if (err instanceof AxiosError) {
+    console.error(err);
+  }
+  const error: ServerError = {};
+  if ("message" in err) {
+    error.message = err.message;
+  }
+  if ("status" in err) {
+    error.status = err.status;
+  }
+  res.status(error.status || 500).send(error.message);
+});
 
 export { app };
 
