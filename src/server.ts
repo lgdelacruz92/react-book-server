@@ -2,7 +2,13 @@ import express from "express";
 import cors from "cors";
 
 import { userChat } from "./webhooks/user-chat";
-import { authRoutes, chatRoutes, stripeRoutes, userRoutes } from "./routes";
+import {
+  authRoutes,
+  chatRoutes,
+  stripeRoutes,
+  trelloRoutes,
+  userRoutes,
+} from "./routes";
 
 const app = express();
 
@@ -24,6 +30,9 @@ app.use("/api/chat", chatRoutes);
 
 // stripe
 app.use("/api/stripe", stripeRoutes);
+
+// trello
+app.use("/api/trello", trelloRoutes);
 
 export { app };
 
