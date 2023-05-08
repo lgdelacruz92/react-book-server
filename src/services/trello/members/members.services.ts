@@ -8,5 +8,7 @@ export const getMyBoards = async () => {
   const response = await get<MyBoards>(
     `${trelloApi}/members/me/boards?${queryAuth}`
   );
-  return response.data;
+
+  // Don't return everything just some.
+  return response.data.map(({ id, name }) => ({ id, name }));
 };
