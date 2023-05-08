@@ -1,5 +1,5 @@
 import { get } from "@/controllers/get";
-import { appConfig } from "@/services/firebase/config";
+import { queryAuth, trelloApi } from "../constants";
 
 export interface TrelloBoard {
   id: string;
@@ -80,9 +80,6 @@ export interface TrelloBoard {
     black_light?: string;
   };
 }
-
-export const trelloApi = "https://api.trello.com/1";
-export const queryAuth = `key=${appConfig.app.trello_key}&token=${appConfig.app.trello_token}`;
 
 export const getBoard = async (boardId: string): Promise<TrelloBoard> => {
   const response = await get<TrelloBoard>(
