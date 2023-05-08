@@ -1,5 +1,5 @@
 import express from "express";
-import BoardsRouter from "./boards/index.routes";
+import BoardsRouter from "./boards/boards.routes";
 
 const router = express.Router();
 

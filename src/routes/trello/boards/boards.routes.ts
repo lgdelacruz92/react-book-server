@@ -1,7 +1,7 @@
-import { getBoard } from "@/controllers/trello/boards/index.controllers";
+import { getBoard } from "@/controllers/trello/boards/boards.controllers";
 import express from "express";
 
-import cardsRoutes from "./cards/index.routes";
+import cardsRoutes from "./cards/cards.routes";
 
 const router = express.Router();
 
