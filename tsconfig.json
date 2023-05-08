@@ -3,11 +3,8 @@
     "compilerOptions": {
       "module": "commonjs",
       "target": "es2017",
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["src/*"]
-      }
-    },
+      "esModuleInterop": true
+    }
   },
   "compilerOptions": {
     "module": "commonjs",
@@ -27,6 +24,11 @@
   },
   "compileOnSave": true,
   "include": [
-    "src", ".eslintrc.js", "firebase.json", "package.json","firestore.indexes.json"
+    "src",
+    ".eslintrc.js",
+    "firebase.json",
+    "package.json",
+    "firestore.indexes.json",
+    "scripts"
   ]
 }

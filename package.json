@@ -9,7 +9,9 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions,hosting",
     "logs": "firebase functions:log",
-    "dev": "LOCAL_DEBUGGING=true node -r ts-node/register -r tsconfig-paths/register src/server.ts"
+    "ts-start": "LOCAL_DEBUGGING=true node -r ts-node/register -r tsconfig-paths/register",
+    "dev": "yarn ts-start -- src/server.ts",
+    "cli": "yarn ts-start -- ./scripts/cli.scripts.ts"
   },
   "engines": {
     "node": "16"
@@ -38,6 +40,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/inquirer": "^8",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
@@ -46,6 +49,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.2.1",
     "firebase-functions-test": "^3.0.0",
+    "inquirer": "^8",
     "prettier": "^2.8.8",
     "tsc-alias": "^1.8.6",
     "typescript": "^4.9.0"
