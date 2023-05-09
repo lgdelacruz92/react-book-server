@@ -13,6 +13,8 @@ if (process.env.LOCAL_DEBUGGING === "true") {
       stream_chat_key: process.env.STREAMCHAT_KEY || "",
       trello_key: process.env.TRELLO_KEY || "",
       trello_token: process.env.TRELLO_TOKEN || "",
+      crypto_encryption_key: process.env.CRYPTO_ENCRYPTION_KEY || "",
+      crypto_encryption_iv: process.env.CRYPTO_ENCRYPTION_IV || "",
     },
   };
 } else {
