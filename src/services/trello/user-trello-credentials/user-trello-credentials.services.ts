@@ -1,6 +1,4 @@
-import UserTrelloCredential, {
-  UserTrelloCredentialJSONType,
-} from "@/models/trello/user-trello-credentials/user-trello-credential.models";
+import UserTrelloCredential from "@/models/trello/user-trello-credentials/user-trello-credential.models";
 import { FirebaseError } from "@/services/firebase/errors.service";
 import db from "@/services/firebase/db.service";
 
@@ -13,7 +11,7 @@ export const createUserTrelloCredentials = async (
     .collection(collectionName)
     .doc(userTrelloCredential.creds.authUserId);
   try {
-    await docRef.set({ ...userTrelloCredential.toEncryptedJSON() });
+    await docRef.set({ ...userTrelloCredential.json() });
   } catch (e) {
     console.error(
       `Error creating user-trello-credential ${userTrelloCredential.creds.authUserId}: ${e}`
@@ -24,18 +22,17 @@ export const createUserTrelloCredentials = async (
 
 export const getUserTrelloCredentials = async (
   authUserId: string
-): Promise<UserTrelloCredentialJSONType> => {
+): Promise<UserTrelloCredential> => {
   const docRef = db.collection(collectionName).doc(authUserId);
   try {
-    const { exists, data } = await docRef.get();
-    if (exists) {
-      const userTrelloCreds = data();
-      const userTrelloCredenTial = new UserTrelloCredential({
-        authUserId: userTrelloCreds?.authUserId,
-        key: userTrelloCreds?.key,
-        token: userTrelloCreds?.token,
+    const doc = await docRef.get();
+    const data = doc.data();
+    if (doc.exists && data) {
+      return new UserTrelloCredential({
+        authUserId: data.authUserId,
+        key: data.key,
+        token: data.token,
       });
-      return userTrelloCredenTial.toDecryptedJSON();
     } else {
       throw new FirebaseError(404, "User trello credential not found");
     }
