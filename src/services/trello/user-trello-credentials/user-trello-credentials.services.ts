@@ -10,7 +10,7 @@ export const createUserTrelloCredentials = async (
     .collection(collectionName)
     .doc(userTrelloCredential.creds.authUserId);
   try {
-    await docRef.set({ ...userTrelloCredential.toJSON() });
+    await docRef.set({ ...userTrelloCredential.toEncryptedJSON() });
   } catch (e) {
     console.error(
       `Error creating user-trello-credential ${userTrelloCredential.creds.authUserId}: ${e}`

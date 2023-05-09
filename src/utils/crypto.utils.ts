@@ -1,8 +1,9 @@
+import { appConfig } from "@/services/firebase/config";
 import crypto from "crypto";
 
 const algorithm = "aes-256-cbc";
-const key = "YOUR_ENCRYPTION_KEY";
-const iv = "YOUR_INITIALIZATION_VECTOR";
+const key = appConfig.app.crypto_encryption_key;
+const iv = appConfig.app.crypto_encryption_iv;
 
 export const encryptString = (text: string) => {
   const cipher = crypto.createCipheriv(algorithm, key, iv);
@@ -17,3 +18,18 @@ export const decryptString = (encrypted: string) => {
   decrypted += decipher.final("utf8");
   return decrypted;
 };
+
+export class EncryptedString {
+  str: string;
+  constructor(_str: string) {
+    this.str = encryptString(_str);
+  }
+
+  get encryptedString(): string {
+    return this.str;
+  }
+
+  get decryptedString(): string {
+    return decryptString(this.str);
+  }
+}
