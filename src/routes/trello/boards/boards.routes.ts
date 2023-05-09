@@ -5,7 +5,7 @@ import cardsRoutes from "./cards/cards.routes";
 
 const router = express.Router();
 
-router.use("/cards", cardsRoutes);
+router.use("/:boardId/cards", cardsRoutes);
 
 // routes here
 router.get("/:boardId", getBoard);

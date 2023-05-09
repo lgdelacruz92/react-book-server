@@ -1,4 +1,4 @@
-import { get } from "@/controllers/get";
+import { get } from "@/services/get";
 import { queryAuth, trelloApi } from "../constants";
 
 export interface TrelloBoard {
