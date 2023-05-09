@@ -6,7 +6,7 @@ interface UserTrelloCredentialType {
   token: EncryptedString;
 }
 
-interface UserTrelloCredentialJSONType {
+export interface UserTrelloCredentialJSONType {
   authUserId: string;
   key: string;
   token: string;

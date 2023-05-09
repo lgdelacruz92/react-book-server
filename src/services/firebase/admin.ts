@@ -8,3 +8,4 @@ const configuration =
 
 admin.initializeApp(configuration);
 export default admin;
+export { FirebaseError } from "firebase-admin";
