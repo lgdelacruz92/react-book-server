@@ -1,4 +1,4 @@
-import ChatInstance from "@/services/chat/chat.service";
+import ChatInstance from "@/services/open-ai/chat/chat.service";
 import { ChatChannel } from "./chat-channel";
 
 export class ChatUser {

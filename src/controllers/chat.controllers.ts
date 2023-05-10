@@ -1,7 +1,7 @@
 import { ChatChannel } from "@/models/chat/chat-channel";
 import { ChatUser } from "@/models/chat/chat-user";
 import { Request, Response } from "express";
-import ChatInstance from "@/services/chat/chat.service";
+import ChatInstance from "@/services/open-ai/chat/chat.service";
 import ChatChannelsManager from "@/models/chat/chat-channels-manager";
 
 export const putChatMember = async (req: Request, res: Response) => {

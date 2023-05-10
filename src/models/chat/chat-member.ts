@@ -1,4 +1,4 @@
-import ChatInstance from "@/services/chat/chat.service";
+import ChatInstance from "@/services/open-ai/chat/chat.service";
 import { ChatMessage } from "./chat-message";
 import { ChatChannel } from "./chat-channel";
 import { ChatUser } from "./chat-user";

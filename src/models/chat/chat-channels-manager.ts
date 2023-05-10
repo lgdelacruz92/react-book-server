@@ -1,4 +1,4 @@
-import ChatInstance from "@/services/chat/chat.service";
+import ChatInstance from "@/services/open-ai/chat/chat.service";
 
 type CreateChannelOptions = {
   name?: string;
