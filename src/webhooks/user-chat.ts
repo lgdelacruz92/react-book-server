@@ -1,7 +1,7 @@
 import { ChatChannel } from "@/models/chat/chat-channel";
 import { ChatMessage } from "@/models/chat/chat-message";
 import { ChatUser } from "@/models/chat/chat-user";
-import { postChatGpt } from "@/services/chat-gpt/post-chatgpt";
+import { postChatGpt } from "@/services/open-ai/post-chatgpt";
 import { MessageChatGPTType } from "@/types/chatgpt/message-type";
 import { PostChatGPTDataType } from "@/types/chatgpt/post-chat-data-type";
 import { Request, Response } from "express";

@@ -23,3 +23,8 @@ export interface ChatCompletion {
   usage: ChatCompletionUsage;
   choices: ChatCompletionChoice[];
 }
+
+export type ChatCompletionPost = {
+  headers: Record<string, string>;
+  body: string;
+};

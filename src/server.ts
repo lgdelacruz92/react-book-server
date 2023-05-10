@@ -1,10 +1,11 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 
 import { userChat } from "./webhooks/user-chat";
 import {
   authRoutes,
   chatRoutes,
+  openAIRoutes,
   stripeRoutes,
   trelloRoutes,
   userRoutes,
@@ -35,13 +36,16 @@ app.use("/api/stripe", stripeRoutes);
 // trello
 app.use("/api/trello", trelloRoutes);
 
+// open-ai
+app.use("/api/open-ai", openAIRoutes);
+
 type ServerError = {
   status?: number;
   message?: string;
 };
 // Error handling middleware
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-app.use((err: any, _: Request, res: Response, next: NextFunction) => {
+app.use((err: any, _: Request, res: Response) => {
   if (err instanceof AxiosError) {
     console.error(err);
   }
